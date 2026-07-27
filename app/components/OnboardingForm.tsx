@@ -34,7 +34,7 @@ export interface OnboardingData {
     alt_mobile: string;
     email: string;
     pan: string;
-    aadhaar4: string;
+    aadhaar: string;
     gender: string;
 
     // Step 1
@@ -75,7 +75,7 @@ const initialFormData: OnboardingData = {
     alt_mobile: "",
     email: "",
     pan: "",
-    aadhaar4: "",
+    aadhaar: "",
     gender: "",
 
     shop_name: "",
@@ -198,7 +198,7 @@ export default function OnboardingForm() {
         if (stepIndex === 0) {
             if (!formData.full_name.trim()) newErrors.full_name = "Full Name is required";
             if (!formData.dob.trim()) newErrors.dob = "Date of Birth is required";
-            
+
             if (!formData.mobile.trim()) {
                 newErrors.mobile = "Mobile number is required";
             } else if (!/^[6-9]\d{9}$/.test(formData.mobile.trim())) {
@@ -221,10 +221,10 @@ export default function OnboardingForm() {
                 newErrors.pan = "Enter a valid 10-character PAN (e.g. ABCDE1234F)";
             }
 
-            if (!formData.aadhaar4.trim()) {
-                newErrors.aadhaar4 = "Aadhaar number is required";
-            } else if (!/^\d{4}$/.test(formData.aadhaar4.trim()) && !/^\d{12}$/.test(formData.aadhaar4.trim())) {
-                newErrors.aadhaar4 = "Enter last 4 digits or 12 digits of Aadhaar";
+            if (!formData.aadhaar.trim()) {
+                newErrors.aadhaar = "Aadhaar number is required";
+            } else if (!/^\d{12}$/.test(formData.aadhaar.trim())) {
+                newErrors.aadhaar = "Enter a valid 12-digit Aadhaar number";
             }
 
             if (!formData.gender) newErrors.gender = "Please select gender";
@@ -236,7 +236,7 @@ export default function OnboardingForm() {
             if (!formData.address.trim()) newErrors.address = "Full shop address is required";
             if (!formData.locality.trim()) newErrors.locality = "Locality / Landmark is required";
             if (!formData.city.trim()) newErrors.city = "City is required";
-            
+
             if (!formData.pincode.trim()) {
                 newErrors.pincode = "Pincode is required";
             } else if (!/^\d{6}$/.test(formData.pincode.trim())) {
@@ -249,7 +249,7 @@ export default function OnboardingForm() {
         if (stepIndex === 2) {
             if (!formData.acc_holder.trim()) newErrors.acc_holder = "Account holder name is required";
             if (!formData.bank_name.trim()) newErrors.bank_name = "Bank name is required";
-            
+
             if (!formData.acc_number.trim()) {
                 newErrors.acc_number = "Account number is required";
             } else if (!/^\d{9,18}$/.test(formData.acc_number.trim())) {
@@ -311,7 +311,7 @@ export default function OnboardingForm() {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         let firstInvalidStep = -1;
         for (let i = 0; i < STEPS.length; i++) {
             if (!validateStep(i)) {
@@ -426,14 +426,14 @@ export default function OnboardingForm() {
                         />
                         <div className="grid grid-cols-1 sm:grid-cols-2">
                             <Field
-                                label="Aadhaar No. (last 4 digits)"
-                                name="aadhaar4"
+                                label="Aadhaar Number (12 digits)"
+                                name="aadhaar"
                                 required
-                                placeholder="Last 4 digits e.g. 4321"
+                                placeholder="12-digit Aadhaar e.g. 123456789012"
                                 maxLength={12}
-                                value={formData.aadhaar4}
-                                onChange={(e) => handleChange("aadhaar4", e.target.value)}
-                                error={errors.aadhaar4}
+                                value={formData.aadhaar}
+                                onChange={(e) => handleChange("aadhaar", e.target.value)}
+                                error={errors.aadhaar}
                             />
                             <Field
                                 label="Gender"
@@ -609,7 +609,7 @@ export default function OnboardingForm() {
                     <div className="p-5">
                         <div className="mb-4 flex items-start gap-2 rounded-xl bg-sky p-3 text-xs text-sky-900">
                             <Upload className="mt-0.5 h-4 w-4 shrink-0" />
-                            <p>Har document ke saamne "Upload document" par click karke JPG, PNG ya PDF file attach kariye. File attach hote hi checkbox apne aap tick ho jayega.</p>
+                            <p>Har document box par click karke JPG, PNG ya PDF file select kariye. File attach hote hi card light red background se highlight ho jayega.</p>
                         </div>
                         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                             <DocUpload

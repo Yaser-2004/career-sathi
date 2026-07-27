@@ -2,7 +2,7 @@ import { type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/app/assets/logols.webp";
-import { ShieldCheck, Headset, FileText, BadgeCheck, UserCheck2, Laptop, Headphones, MessageSquare, Quote, Lock, MessageCircle, ChevronDown, HelpCircle, Sparkles } from "lucide-react";
+import { ShieldCheck, Headset, FileText, BadgeCheck, UserCheck2, Laptop, Headphones, MessageSquare, Quote, Lock, MessageCircle, ChevronDown, HelpCircle, Sparkles } from "lucide-react"
 import {
     Wallet,
     Target,
