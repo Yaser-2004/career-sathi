@@ -29,7 +29,7 @@ import {
 export function Logo({ className = "" }: { className?: string }) {
     return (
         <span className={`font-display text-2xl font-semibold tracking-tight text-primary ${className}`}>
-            <Image src={logo} alt="Logo" width={200} />
+            <Image src={logo} alt="Logo" className="w-[120px] md:w-[180px] " />
         </span>
     );
 }
